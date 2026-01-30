@@ -1,0 +1,39 @@
+package org.firstinspires.ftc.teamcode;
+
+public class Constants {
+
+    public static final class OIConstants{
+
+
+    }
+
+    public static final class transferConstants{
+
+
+    }
+
+    public static final class shooterConstants{
+
+
+    }
+
+    public static final class mecanumConstants{
+
+
+    }
+
+    public static final class encoderAutoConstants{
+        public static final double     DRIVE_SPEED             = 0.25;
+        public static final double     TURN_SPEED              = 0.5;
+
+        public static final double     COUNTS_PER_MOTOR_REV    = 28 ;    // REV ultraplanetary motor
+        public static final double     DRIVE_GEAR_REDUCTION    = 20 ;     // External Gearing.
+        public static final double     WHEEL_DIAMETER_INCHES   = 3 ;     // For figuring circumference
+        public static final double     COUNTS_PER_INCH         = (COUNTS_PER_MOTOR_REV * DRIVE_GEAR_REDUCTION) /
+                (WHEEL_DIAMETER_INCHES * Math.PI);
+
+    }
+
+
+
+}
