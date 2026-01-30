@@ -14,6 +14,8 @@ public class Constants {
 
     public static final class shooterConstants{
 
+        public static double shooterPower = 0.5;
+
 
     }
 
