@@ -21,7 +21,7 @@ public class threeArtifactAuto extends autoRobotContainer {
 
         schedule(
                 new SequentialCommandGroup(
-                        new MoveRobotEncoderXY_CMD(-18, -18, 3, 0.4, driveSub),
+                        new MoveRobotEncoderXY_CMD(-22, -22, 3, 0.4, driveSub),
                         new waitCommand(timeOutbetweenShoots),
                         new teleOpTransferCommand(transferSub, transferMotorPower, timeOutShooting),
                         new waitCommand(timeOutbetweenShoots),
