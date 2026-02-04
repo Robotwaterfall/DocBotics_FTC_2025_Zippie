@@ -27,6 +27,7 @@ public class Constants {
     public static boolean isFieldCentric = true;
     public static double llLockOnKp = 0.035;
     public static double clippedRotLockOnPower = 0.7;
+    public static double tyOffSet = -5;
 
 
     public static final class mecanumConstants{

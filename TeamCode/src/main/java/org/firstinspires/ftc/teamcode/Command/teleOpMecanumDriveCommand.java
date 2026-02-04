@@ -2,6 +2,7 @@ package org.firstinspires.ftc.teamcode.Command;
 
 import static org.firstinspires.ftc.teamcode.Constants.clippedRotLockOnPower;
 import static org.firstinspires.ftc.teamcode.Constants.llLockOnKp;
+import static org.firstinspires.ftc.teamcode.Constants.tyOffSet;
 
 import com.arcrobotics.ftclib.command.CommandBase;
 
@@ -49,7 +50,7 @@ public class teleOpMecanumDriveCommand extends CommandBase {
             double forward = -ySupplier.get();
             double strafe = -xSupplier.get();
 
-            double error = -llSub.getTy();
+            double error = -(llSub.getTy() - tyOffSet);
 
             double rotPower = error * llLockOnKp;
 
