@@ -19,15 +19,20 @@ public class Constants {
 
     public static double shooterPower = 0.6;
 
-    public static double farZoneShooting = 0.9;
+    public static double farZoneShooting = 0.75;
     public static double cycleShoot = 0.3;
     public static double timeOutShooting = 0.35;
     public static double timeOutbetweenShoots = 2.5;
     public static double strafeCorrection = 1.1;
     public static boolean isFieldCentric = true;
     public static double llLockOnKp = 0.035;
-    public static double clippedRotLockOnPower = 0.7;
-    public static double tyOffSet = -5;
+    public static double clippedRotLockOnPower = 0.5;
+    public static double tyOffSet = -7;
+
+    public static double min_Tx = 5;
+    public static double max_Tx = 28;
+    public static double min_Shooter_Power = 0.5;
+    public static double max_Shooter_Power = 0.75;
 
 
     public static final class mecanumConstants{
