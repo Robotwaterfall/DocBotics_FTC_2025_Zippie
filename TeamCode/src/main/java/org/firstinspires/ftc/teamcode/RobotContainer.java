@@ -20,6 +20,7 @@ import org.firstinspires.ftc.teamcode.Command.teleOpMecanumDriveCommand;
 import org.firstinspires.ftc.teamcode.Command.teleOpTransferCommand;
 import org.firstinspires.ftc.teamcode.Command.waitCommand;
 import org.firstinspires.ftc.teamcode.Subsystem.flywheelSubsystem;
+import org.firstinspires.ftc.teamcode.Subsystem.limelightSubsystem;
 import org.firstinspires.ftc.teamcode.Subsystem.mecanumDriveSubsystem;
 import org.firstinspires.ftc.teamcode.Subsystem.transferSubsystem;
 
@@ -28,6 +29,7 @@ public class RobotContainer extends CommandOpMode {
     private mecanumDriveSubsystem driveSub;
     private flywheelSubsystem flywheelSub;
     private transferSubsystem transferSub;
+    private limelightSubsystem llSub;
     private GamepadEx driverJoystick;
 
     @Override
@@ -46,6 +48,10 @@ public class RobotContainer extends CommandOpMode {
 
         transferSub = new transferSubsystem(
                 hardwareMap.get(DcMotor.class,"transferMotor")
+        );
+
+        llSub = new limelightSubsystem(
+                hardwareMap
         );
 
         driverJoystick = new GamepadEx(gamepad1);
@@ -72,9 +78,11 @@ public class RobotContainer extends CommandOpMode {
         driveSub.setDefaultCommand(
                 new teleOpMecanumDriveCommand(
                         driveSub,
+                        llSub,
                         () -> applyDeadband(driverJoystick.getLeftY(), 0.05),  // Forward/back
                         () -> applyDeadband(driverJoystick.getLeftX(), 0.05),  // Strafe
                         () -> applyDeadband(driverJoystick.getRightX(), 0.05), // Rotate
+                        () -> driverJoystick.getTrigger(GamepadKeys.Trigger.RIGHT_TRIGGER),
                         () -> driverJoystick.getButton(GamepadKeys.Button.START)        // Reset
                 )
         );
