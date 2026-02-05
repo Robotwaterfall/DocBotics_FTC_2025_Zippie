@@ -117,7 +117,6 @@ public class RobotContainer extends CommandOpMode {
         driverJoystick.getGamepadButton(GamepadKeys.Button.X)
                 .toggleWhenPressed(
                         new SequentialCommandGroup(
-                        new waitCommand(3.5),
                         new teleOpFlywheelAdjustCommand(llSub, flywheelSub)
                 ));
 
