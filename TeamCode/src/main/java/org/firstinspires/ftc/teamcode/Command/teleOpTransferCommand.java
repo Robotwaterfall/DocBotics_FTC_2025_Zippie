@@ -1,23 +1,28 @@
 package org.firstinspires.ftc.teamcode.Command;
 
+import static org.firstinspires.ftc.teamcode.Constants.limelightConstants.ShooterLockedZone;
+
 import com.arcrobotics.ftclib.command.CommandBase;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.teamcode.Constants;
+import org.firstinspires.ftc.teamcode.Subsystem.limelightSubsystem;
 import org.firstinspires.ftc.teamcode.Subsystem.transferSubsystem;
 
 public class teleOpTransferCommand extends CommandBase {
 
     transferSubsystem transferSubsystem;
+    limelightSubsystem llSub;
     DcMotor transferMotor;
     double transferSpeed;
 
     private final double m_timeIndexing;
     private ElapsedTime runtime = new ElapsedTime();
 
-    public teleOpTransferCommand(transferSubsystem transferSubsystem, double transferSpeed, double timeIndexing){
+    public teleOpTransferCommand(transferSubsystem transferSubsystem, limelightSubsystem llSub, double transferSpeed, double timeIndexing){
         this.transferSubsystem = transferSubsystem;
+        this.llSub = llSub;
         this.transferMotor = transferSubsystem.getTransferMotor();
         this.transferSpeed = transferSpeed;
         this.m_timeIndexing = timeIndexing;
@@ -34,8 +39,9 @@ public class teleOpTransferCommand extends CommandBase {
 
     @Override
     public void execute() {
-
-        transferMotor.setPower(transferSpeed);
+        if(llSub.hasTarget() && Math.abs(llSub.getTy()) <= ShooterLockedZone) {
+            transferMotor.setPower(transferSpeed);
+        }
 
     }
 

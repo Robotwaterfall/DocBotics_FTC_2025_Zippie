@@ -1,10 +1,9 @@
 package org.firstinspires.ftc.teamcode;
 
-import static org.firstinspires.ftc.teamcode.Constants.cycleShoot;
-import static org.firstinspires.ftc.teamcode.Constants.farZoneShooting;
-import static org.firstinspires.ftc.teamcode.Constants.shooterPower;
-import static org.firstinspires.ftc.teamcode.Constants.timeOutShooting;
-import static org.firstinspires.ftc.teamcode.Constants.timeOutbetweenShoots;
+import static org.firstinspires.ftc.teamcode.Constants.shooterConstants.farZoneShooting;
+import static org.firstinspires.ftc.teamcode.Constants.shooterConstants.shooterPower;
+import static org.firstinspires.ftc.teamcode.Constants.shooterConstants.timeOutShooting;
+import static org.firstinspires.ftc.teamcode.Constants.shooterConstants.timeOutbetweenShoots;
 import static org.firstinspires.ftc.teamcode.Constants.transferConstants.transferMotorPower;
 
 import com.arcrobotics.ftclib.command.CommandOpMode;
@@ -98,10 +97,10 @@ public class RobotContainer extends CommandOpMode {
             return driverJoystick.getTrigger(GamepadKeys.Trigger.LEFT_TRIGGER) > 0.7;
         } );
 
-        outTrigger.whileActiveContinuous(new teleOpTransferCommand(transferSub, -transferMotorPower, 100));
+        outTrigger.whileActiveContinuous(new teleOpTransferCommand(transferSub, llSub, -transferMotorPower, 100));
 
         transferTrigger.whileActiveContinuous(new SequentialCommandGroup(
-                new teleOpTransferCommand(transferSub, transferMotorPower,timeOutShooting),
+                new teleOpTransferCommand(transferSub, llSub, transferMotorPower,timeOutShooting),
                 new waitCommand(timeOutbetweenShoots) //seconds
         ));
 
@@ -111,18 +110,13 @@ public class RobotContainer extends CommandOpMode {
         driverJoystick.getGamepadButton(GamepadKeys.Button.B)
                 .toggleWhenPressed(new teleOpFlywheelCommand(flywheelSub, farZoneShooting));
 
-        driverJoystick.getGamepadButton(GamepadKeys.Button.DPAD_RIGHT)
-                .whileActiveContinuous(new SequentialCommandGroup(
-                        new waitCommand(timeOutbetweenShoots),
-                        new teleOpTransferCommand(transferSub, transferMotorPower, timeOutShooting)
-
-                ));
-
-        driverJoystick.getGamepadButton(GamepadKeys.Button.DPAD_RIGHT)
-                .whileActiveContinuous(new teleOpFlywheelCommand(flywheelSub, cycleShoot));
 
         driverJoystick.getGamepadButton(GamepadKeys.Button.X)
-                .toggleWhenPressed(new teleOpFlywheelAdjustCommand(llSub, flywheelSub));
+                .toggleWhenPressed(
+                        new SequentialCommandGroup(
+                        new waitCommand(3.5),
+                        new teleOpFlywheelAdjustCommand(llSub, flywheelSub)
+                ));
 
     }
 

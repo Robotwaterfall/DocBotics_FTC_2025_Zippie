@@ -10,6 +10,7 @@ import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.IMU;
 
+import org.firstinspires.ftc.robotcore.external.Const;
 import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
 import org.firstinspires.ftc.robotcore.external.navigation.YawPitchRollAngles;
 import org.firstinspires.ftc.teamcode.Constants;
@@ -24,8 +25,8 @@ public class mecanumDriveSubsystem extends SubsystemBase {
     private final FtcDashboard dashboard = FtcDashboard.getInstance();
 
     public final IMU imu;
-    public boolean isFieldCentric = Constants.isFieldCentric; //true = field-centric, false = robot-centric
-    private double strafeCorrection = Constants.strafeCorrection;
+    public boolean isFieldCentric = Constants.mecanumConstants.isFieldCentric; //true = field-centric, false = robot-centric
+    private double strafeCorrection = Constants.mecanumConstants.strafeCorrection;
 
     public mecanumDriveSubsystem(DcMotor frontLeft, DcMotor frontRight, DcMotor backLeft, DcMotor backRight, HardwareMap hardwareMap) {
         m_Fl = frontLeft;

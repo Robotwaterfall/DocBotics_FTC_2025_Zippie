@@ -1,7 +1,7 @@
 package org.firstinspires.ftc.teamcode.Auto.Paths;
 
-import static org.firstinspires.ftc.teamcode.Constants.timeOutShooting;
-import static org.firstinspires.ftc.teamcode.Constants.timeOutbetweenShoots;
+import static org.firstinspires.ftc.teamcode.Constants.shooterConstants.timeOutShooting;
+import static org.firstinspires.ftc.teamcode.Constants.shooterConstants.timeOutbetweenShoots;
 import static org.firstinspires.ftc.teamcode.Constants.transferConstants.transferMotorPower;
 
 import com.arcrobotics.ftclib.command.SequentialCommandGroup;
@@ -23,11 +23,11 @@ public class threeArtifactAuto extends autoRobotContainer {
                 new SequentialCommandGroup(
                         new MoveRobotEncoderXY_CMD(-22, -22, 3, 0.4, driveSub),
                         new waitCommand(timeOutbetweenShoots),
-                        new teleOpTransferCommand(transferSub, transferMotorPower, timeOutShooting),
+                        new teleOpTransferCommand(transferSub, llSub, transferMotorPower, timeOutShooting),
                         new waitCommand(timeOutbetweenShoots),
-                        new teleOpTransferCommand(transferSub, transferMotorPower, timeOutShooting),
+                        new teleOpTransferCommand(transferSub, llSub, transferMotorPower, timeOutShooting),
                         new waitCommand(timeOutbetweenShoots),
-                        new teleOpTransferCommand(transferSub, transferMotorPower, timeOutShooting)
+                        new teleOpTransferCommand(transferSub, llSub, transferMotorPower, timeOutShooting)
                 )
         );
     }

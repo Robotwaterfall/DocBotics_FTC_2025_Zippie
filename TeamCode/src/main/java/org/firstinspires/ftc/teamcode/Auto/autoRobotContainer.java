@@ -1,6 +1,6 @@
 package org.firstinspires.ftc.teamcode.Auto;
 
-import static org.firstinspires.ftc.teamcode.Constants.shooterPower;
+import static org.firstinspires.ftc.teamcode.Constants.shooterConstants.shooterPower;
 
 import com.arcrobotics.ftclib.command.CommandOpMode;
 import com.arcrobotics.ftclib.command.SequentialCommandGroup;
@@ -8,8 +8,10 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 
 import org.firstinspires.ftc.teamcode.Command.teleOpFlywheelCommand;
+import org.firstinspires.ftc.teamcode.Command.teleOpMecanumDriveCommand;
 import org.firstinspires.ftc.teamcode.Constants;
 import org.firstinspires.ftc.teamcode.Subsystem.flywheelSubsystem;
+import org.firstinspires.ftc.teamcode.Subsystem.limelightSubsystem;
 import org.firstinspires.ftc.teamcode.Subsystem.mecanumDriveSubsystem;
 import org.firstinspires.ftc.teamcode.Subsystem.transferSubsystem;
 
@@ -19,6 +21,7 @@ public class autoRobotContainer extends CommandOpMode {
     public DcMotor backLeft;
     public DcMotor backRight;
     public mecanumDriveSubsystem driveSub;
+    public limelightSubsystem llSub;
 
     public DcMotor shooterMotor;
     public flywheelSubsystem flywheelSub;
@@ -50,6 +53,8 @@ public class autoRobotContainer extends CommandOpMode {
         transferMotor.setDirection(DcMotorSimple.Direction.REVERSE);
 
 
+
+
         initSubsystems();
         path();
 
@@ -64,6 +69,8 @@ public class autoRobotContainer extends CommandOpMode {
 
         transferSub = new transferSubsystem(transferMotor);
 
+        llSub = new limelightSubsystem(hardwareMap);
+
 
     }
 
@@ -74,6 +81,8 @@ public class autoRobotContainer extends CommandOpMode {
                 )
         );
     }
+
+
 
     public void stopShooter(){
         schedule(

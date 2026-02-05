@@ -17,26 +17,36 @@ public class Constants {
 
     }
 
-    public static double shooterPower = 0.6;
+    public static final class shooterConstants{
+        public static double shooterPower = 0.6;
 
-    public static double farZoneShooting = 0.75;
-    public static double cycleShoot = 0.3;
-    public static double timeOutShooting = 0.35;
-    public static double timeOutbetweenShoots = 2.5;
-    public static double strafeCorrection = 1.1;
-    public static boolean isFieldCentric = true;
-    public static double llLockOnKp = 0.035;
-    public static double clippedRotLockOnPower = 0.5;
-    public static double tyOffSet = -7;
+        public static double farZoneShooting = 0.75;
+        public static double timeOutShooting = 0.35;
+        public static double timeOutbetweenShoots = 2.5;
 
-    public static double min_Tx = 5;
-    public static double max_Tx = 28;
-    public static double min_Shooter_Power = 0.5;
-    public static double max_Shooter_Power = 0.75;
+    }
+
+
+    public static final class limelightConstants{
+
+        public static double min_Tx = 5;
+        public static double max_Tx = 28;
+        public static double min_Shooter_Power = 0.5;
+        public static double max_Shooter_Power = 0.75;
+
+        public static double ShooterLockedZone = 8;
+        public static double llLockOnKp = 0.02;
+        public static double tyOffSet = -7;
+
+    }
 
 
     public static final class mecanumConstants{
         public static final double thresHold = 0.05;
+        public static double clippedRotLockOnPower = 0.5;
+
+        public static double strafeCorrection = 1.1;
+        public static boolean isFieldCentric = true;
 
         public static final class encoderAutoConstants{
             public static final double     DRIVE_SPEED             = 0.25;
