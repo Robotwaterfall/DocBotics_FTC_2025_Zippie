@@ -16,16 +16,22 @@ public class teleOpTransferCommand extends CommandBase {
     limelightSubsystem llSub;
     DcMotor transferMotor;
     double transferSpeed;
+    boolean isAuto = false;
 
     private final double m_timeIndexing;
     private ElapsedTime runtime = new ElapsedTime();
 
-    public teleOpTransferCommand(transferSubsystem transferSubsystem, limelightSubsystem llSub, double transferSpeed, double timeIndexing){
+    public teleOpTransferCommand(transferSubsystem transferSubsystem,
+                                 limelightSubsystem llSub,
+                                 double transferSpeed,
+                                 double timeIndexing,
+                                 boolean isAuto){
         this.transferSubsystem = transferSubsystem;
         this.llSub = llSub;
         this.transferMotor = transferSubsystem.getTransferMotor();
         this.transferSpeed = transferSpeed;
         this.m_timeIndexing = timeIndexing;
+        this.isAuto = isAuto;
         addRequirements(transferSubsystem);
 
     }
@@ -39,7 +45,7 @@ public class teleOpTransferCommand extends CommandBase {
 
     @Override
     public void execute() {
-        if(llSub.hasTarget() && Math.abs(llSub.getTy()) <= ShooterLockedZone) {
+        if(llSub.hasTarget() && Math.abs(llSub.getTy()) <= ShooterLockedZone || isAuto) {
             transferMotor.setPower(transferSpeed);
         }
 

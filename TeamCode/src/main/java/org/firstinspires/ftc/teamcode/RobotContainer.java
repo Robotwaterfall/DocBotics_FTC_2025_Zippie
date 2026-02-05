@@ -97,10 +97,10 @@ public class RobotContainer extends CommandOpMode {
             return driverJoystick.getTrigger(GamepadKeys.Trigger.LEFT_TRIGGER) > 0.7;
         } );
 
-        outTrigger.whileActiveContinuous(new teleOpTransferCommand(transferSub, llSub, -transferMotorPower, 100));
+        outTrigger.whileActiveContinuous(new teleOpTransferCommand(transferSub, llSub, -transferMotorPower, 100,false));
 
         transferTrigger.whileActiveContinuous(new SequentialCommandGroup(
-                new teleOpTransferCommand(transferSub, llSub, transferMotorPower,timeOutShooting),
+                new teleOpTransferCommand(transferSub, llSub, transferMotorPower,timeOutShooting,false),
                 new waitCommand(timeOutbetweenShoots) //seconds
         ));
 

@@ -9,26 +9,39 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 
 import org.firstinspires.ftc.teamcode.Auto.MoveRobotEncoderXY_CMD;
 import org.firstinspires.ftc.teamcode.Auto.autoRobotContainer;
+import org.firstinspires.ftc.teamcode.Command.autoLimelightLockCommand;
 import org.firstinspires.ftc.teamcode.Command.teleOpTransferCommand;
 import org.firstinspires.ftc.teamcode.Command.waitCommand;
 
 @Autonomous
-public class threeArtifactAuto extends autoRobotContainer {
+public class threeArtifactAuto_FarZoneDiamond extends autoRobotContainer {
+
 
     @Override
     public void path() {
-        runShooter();
+
+        runLimelightShooter();
 
         schedule(
+
                 new SequentialCommandGroup(
-                        new MoveRobotEncoderXY_CMD(-22, -22, 3, 0.4, driveSub),
+                        new MoveRobotEncoderXY_CMD(3.91,3.91,4,0.35, driveSub),
+
+                        new waitCommand(2.5),
+
+                        new autoLimelightLockCommand(llSub,driveSub),
+
+                        new teleOpTransferCommand(transferSub, llSub, transferMotorPower, timeOutShooting, true),
                         new waitCommand(timeOutbetweenShoots),
-                        new teleOpTransferCommand(transferSub, llSub, transferMotorPower, timeOutShooting),
+                        new teleOpTransferCommand(transferSub, llSub, transferMotorPower, timeOutShooting, true),
                         new waitCommand(timeOutbetweenShoots),
-                        new teleOpTransferCommand(transferSub, llSub, transferMotorPower, timeOutShooting),
-                        new waitCommand(timeOutbetweenShoots),
-                        new teleOpTransferCommand(transferSub, llSub, transferMotorPower, timeOutShooting)
+                        new teleOpTransferCommand(transferSub, llSub, transferMotorPower, timeOutShooting, true),
+                        new waitCommand(timeOutbetweenShoots)
+
+
                 )
         );
+
+
     }
 }

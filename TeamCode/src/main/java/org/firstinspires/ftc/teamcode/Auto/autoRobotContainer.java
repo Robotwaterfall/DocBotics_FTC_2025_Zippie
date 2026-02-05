@@ -7,6 +7,7 @@ import com.arcrobotics.ftclib.command.SequentialCommandGroup;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 
+import org.firstinspires.ftc.teamcode.Command.teleOpFlywheelAdjustCommand;
 import org.firstinspires.ftc.teamcode.Command.teleOpFlywheelCommand;
 import org.firstinspires.ftc.teamcode.Command.teleOpMecanumDriveCommand;
 import org.firstinspires.ftc.teamcode.Constants;
@@ -78,6 +79,14 @@ public class autoRobotContainer extends CommandOpMode {
         schedule(
                 new SequentialCommandGroup(
                         new teleOpFlywheelCommand(flywheelSub, shooterPower)
+                )
+        );
+    }
+
+    public void runLimelightShooter(){
+        schedule(
+                new SequentialCommandGroup(
+                        new teleOpFlywheelAdjustCommand(llSub, flywheelSub)
                 )
         );
     }
