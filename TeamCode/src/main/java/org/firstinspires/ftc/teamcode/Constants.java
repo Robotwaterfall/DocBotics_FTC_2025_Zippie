@@ -17,25 +17,30 @@ public class Constants {
 
     }
 
+    @Config
     public static final class shooterConstants{
-        public static double shooterPower = 0.6;
+        public static double shooterPower = 0.54;
 
-        public static double farZoneShooting = 0.75;
+        public static double farZoneShooting = 0.64;
         public static double timeOutShooting = 0.35;
         public static double timeOutbetweenShoots = 2.5;
 
     }
 
+    public static double llLockOnKp = 0.025;
+    public static double lockOnDeadband = 5;
 
+
+    @Config
     public static final class limelightConstants{
 
-        public static double min_Tx = 5;
-        public static double max_Tx = 28;
-        public static double min_Shooter_Power = 0.5;
-        public static double max_Shooter_Power = 0.75;
+        public static double min_Tx = 4;
+        public static double max_Tx = 25;
+        public static double min_Shooter_Power = 0.54;
+        public static double max_Shooter_Power = 0.64;
 
         public static double ShooterLockedZone = 8;
-        public static double llLockOnKp = 0.02;
+
         public static double tyOffSet = -7;
 
     }

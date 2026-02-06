@@ -1,7 +1,12 @@
 package org.firstinspires.ftc.teamcode.Command;
 
 import static org.firstinspires.ftc.teamcode.Constants.limelightConstants.ShooterLockedZone;
+import static org.firstinspires.ftc.teamcode.Constants.limelightConstants.tyOffSet;
+import static org.firstinspires.ftc.teamcode.Constants.llLockOnKp;
+import static org.firstinspires.ftc.teamcode.Constants.lockOnDeadband;
 
+import com.acmerobotics.dashboard.FtcDashboard;
+import com.acmerobotics.dashboard.telemetry.TelemetryPacket;
 import com.arcrobotics.ftclib.command.CommandBase;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.util.ElapsedTime;
@@ -20,6 +25,8 @@ public class teleOpTransferCommand extends CommandBase {
 
     private final double m_timeIndexing;
     private ElapsedTime runtime = new ElapsedTime();
+
+    private final FtcDashboard dashboard = FtcDashboard.getInstance();
 
     public teleOpTransferCommand(transferSubsystem transferSubsystem,
                                  limelightSubsystem llSub,
@@ -45,9 +52,15 @@ public class teleOpTransferCommand extends CommandBase {
 
     @Override
     public void execute() {
-        if(llSub.hasTarget() && Math.abs(llSub.getTy()) <= ShooterLockedZone || isAuto) {
+
+        boolean isLockedOn = Math.abs(llSub.getTy() - tyOffSet) < lockOnDeadband;
+        if(llSub.hasTarget() && isLockedOn || isAuto) {
             transferMotor.setPower(transferSpeed);
         }
+
+        TelemetryPacket drivePacket = new TelemetryPacket();
+        drivePacket.put("isLockedOn", isLockedOn);
+        dashboard.sendTelemetryPacket(drivePacket);
 
     }
 

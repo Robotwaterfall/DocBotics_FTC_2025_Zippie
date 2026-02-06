@@ -1,8 +1,8 @@
 package org.firstinspires.ftc.teamcode.Command;
 
 import static org.firstinspires.ftc.teamcode.Constants.limelightConstants.ShooterLockedZone;
-import static org.firstinspires.ftc.teamcode.Constants.limelightConstants.llLockOnKp;
 import static org.firstinspires.ftc.teamcode.Constants.limelightConstants.tyOffSet;
+import static org.firstinspires.ftc.teamcode.Constants.llLockOnKp;
 import static org.firstinspires.ftc.teamcode.Constants.mecanumConstants.clippedRotLockOnPower;
 
 import com.arcrobotics.ftclib.command.CommandBase;
