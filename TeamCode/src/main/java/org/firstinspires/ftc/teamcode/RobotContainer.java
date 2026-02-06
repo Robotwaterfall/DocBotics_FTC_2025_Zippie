@@ -1,9 +1,6 @@
 package org.firstinspires.ftc.teamcode;
 
-import static org.firstinspires.ftc.teamcode.Constants.shooterConstants.farZoneShooting;
-import static org.firstinspires.ftc.teamcode.Constants.shooterConstants.shooterPower;
 import static org.firstinspires.ftc.teamcode.Constants.shooterConstants.timeOutShooting;
-import static org.firstinspires.ftc.teamcode.Constants.shooterConstants.timeOutbetweenShoots;
 import static org.firstinspires.ftc.teamcode.Constants.transferConstants.transferMotorPower;
 
 import com.arcrobotics.ftclib.command.CommandOpMode;
@@ -13,12 +10,11 @@ import com.arcrobotics.ftclib.gamepad.GamepadEx;
 import com.arcrobotics.ftclib.gamepad.GamepadKeys;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotorEx;
 
-import org.firstinspires.ftc.teamcode.Command.teleOpFlywheelAdjustCommand;
-import org.firstinspires.ftc.teamcode.Command.teleOpFlywheelCommand;
+import org.firstinspires.ftc.teamcode.Command.spinFlywheelCommand;
 import org.firstinspires.ftc.teamcode.Command.teleOpMecanumDriveCommand;
 import org.firstinspires.ftc.teamcode.Command.teleOpTransferCommand;
-import org.firstinspires.ftc.teamcode.Command.waitCommand;
 import org.firstinspires.ftc.teamcode.Subsystem.flywheelSubsystem;
 import org.firstinspires.ftc.teamcode.Subsystem.limelightSubsystem;
 import org.firstinspires.ftc.teamcode.Subsystem.mecanumDriveSubsystem;
@@ -43,7 +39,7 @@ public class RobotContainer extends CommandOpMode {
         );
 
         flywheelSub = new flywheelSubsystem(
-                hardwareMap.get(DcMotor.class,"shooterMotor")
+                hardwareMap.get(DcMotorEx.class,"shooterMotor")
         );
 
         transferSub = new transferSubsystem(
@@ -89,36 +85,29 @@ public class RobotContainer extends CommandOpMode {
 
 
 
-        Trigger transferTrigger = new Trigger(() -> {
+        Trigger startShooterSequanceTrigger = new Trigger(() -> {
             return driverJoystick.getTrigger(GamepadKeys.Trigger.RIGHT_TRIGGER) > 0.7;
         } );
+
 
         Trigger outTrigger = new Trigger(() -> {
             return driverJoystick.getTrigger(GamepadKeys.Trigger.LEFT_TRIGGER) > 0.7;
         } );
 
-        outTrigger.whileActiveContinuous(new teleOpTransferCommand(transferSub, llSub, -transferMotorPower, 100,false));
-
-        transferTrigger.whileActiveContinuous(new SequentialCommandGroup(
-                new teleOpTransferCommand(transferSub, llSub, transferMotorPower,timeOutShooting,false),
-                new waitCommand(timeOutbetweenShoots) //seconds
-        ));
-
-        driverJoystick.getGamepadButton(GamepadKeys.Button.LEFT_BUMPER)
-                        .whileActiveContinuous(new teleOpFlywheelCommand(flywheelSub, -shooterPower));
-
-        driverJoystick.getGamepadButton(GamepadKeys.Button.Y)
-                .toggleWhenPressed(new teleOpFlywheelCommand(flywheelSub, shooterPower));
-
-        driverJoystick.getGamepadButton(GamepadKeys.Button.B)
-                .toggleWhenPressed(new teleOpFlywheelCommand(flywheelSub, farZoneShooting));
+        outTrigger.whileActiveContinuous(new teleOpTransferCommand(transferSub, -transferMotorPower, 1000));
 
 
-        driverJoystick.getGamepadButton(GamepadKeys.Button.X)
-                .toggleWhenPressed(
-                        new SequentialCommandGroup(
-                        new teleOpFlywheelAdjustCommand(llSub, flywheelSub)
-                ));
+
+        startShooterSequanceTrigger.whileActiveContinuous(
+               new SequentialCommandGroup(
+                       new spinFlywheelCommand(flywheelSub, llSub),
+                       new teleOpTransferCommand(transferSub, transferMotorPower, timeOutShooting)
+               )
+        );
+
+
+
+
 
     }
 

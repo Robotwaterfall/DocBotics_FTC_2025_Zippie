@@ -20,7 +20,7 @@ public class threeArtifactAuto_FarZoneDiamond extends autoRobotContainer {
     @Override
     public void path() {
 
-        runLimelightShooter();
+
 
         schedule(
 
@@ -31,11 +31,11 @@ public class threeArtifactAuto_FarZoneDiamond extends autoRobotContainer {
 
                         new autoLimelightLockCommand(llSub,driveSub),
 
-                        new teleOpTransferCommand(transferSub, llSub, transferMotorPower, timeOutShooting, true),
+                        new teleOpTransferCommand(transferSub, transferMotorPower, timeOutShooting),
                         new waitCommand(timeOutbetweenShoots),
-                        new teleOpTransferCommand(transferSub, llSub, transferMotorPower, timeOutShooting, true),
+                        new teleOpTransferCommand(transferSub, transferMotorPower, timeOutShooting),
                         new waitCommand(timeOutbetweenShoots),
-                        new teleOpTransferCommand(transferSub, llSub, transferMotorPower, timeOutShooting, true),
+                        new teleOpTransferCommand(transferSub, transferMotorPower, timeOutShooting),
                         new waitCommand(timeOutbetweenShoots)
 
 

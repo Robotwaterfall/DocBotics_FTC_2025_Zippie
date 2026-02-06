@@ -17,17 +17,17 @@ public class threeArtifactAuto_DriveAway extends autoRobotContainer {
 
     @Override
     public void path() {
-        runShooter();
+
 
         schedule(
                 new SequentialCommandGroup(
                         new MoveRobotEncoderXY_CMD(-22, -22, 3, 0.4, driveSub),
                         new waitCommand(timeOutbetweenShoots),
-                        new teleOpTransferCommand(transferSub, llSub, transferMotorPower, timeOutShooting,true),
+                        new teleOpTransferCommand(transferSub, transferMotorPower, timeOutShooting),
                         new waitCommand(timeOutbetweenShoots),
-                        new teleOpTransferCommand(transferSub, llSub, transferMotorPower, timeOutShooting,true),
+                        new teleOpTransferCommand(transferSub, transferMotorPower, timeOutShooting),
                         new waitCommand(timeOutbetweenShoots),
-                        new teleOpTransferCommand(transferSub, llSub, transferMotorPower, timeOutShooting,true)
+                        new teleOpTransferCommand(transferSub, transferMotorPower, timeOutShooting)
                 )
         );
     }
