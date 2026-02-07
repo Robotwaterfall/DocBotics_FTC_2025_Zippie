@@ -19,11 +19,12 @@ public class Constants {
 
     @Config
     public static final class shooterConstants{
-        public static double shooterPower = 0.54;
+        public static double shooterVelocity = 15;
 
-        public static double farZoneShooting = 0.64;
+        public static double farZoneShootingVelocity = 17;
         public static double timeOutShooting = 0.35;
-        public static double timeOutbetweenShoots = 2.5;
+        public static double timeOutbetweenShots = 1.0;
+        public static double shooterTolerance = 0.3;
 
     }
 

@@ -1,7 +1,8 @@
 package org.firstinspires.ftc.teamcode.Auto.Paths;
 
+import static org.firstinspires.ftc.teamcode.Constants.shooterConstants.farZoneShootingVelocity;
 import static org.firstinspires.ftc.teamcode.Constants.shooterConstants.timeOutShooting;
-import static org.firstinspires.ftc.teamcode.Constants.shooterConstants.timeOutbetweenShoots;
+import static org.firstinspires.ftc.teamcode.Constants.shooterConstants.timeOutbetweenShots;
 import static org.firstinspires.ftc.teamcode.Constants.transferConstants.transferMotorPower;
 
 import com.arcrobotics.ftclib.command.SequentialCommandGroup;
@@ -10,6 +11,7 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import org.firstinspires.ftc.teamcode.Auto.MoveRobotEncoderXY_CMD;
 import org.firstinspires.ftc.teamcode.Auto.autoRobotContainer;
 import org.firstinspires.ftc.teamcode.Command.autoLimelightLockCommand;
+import org.firstinspires.ftc.teamcode.Command.teleOpFlywheelCommand;
 import org.firstinspires.ftc.teamcode.Command.teleOpTransferCommand;
 import org.firstinspires.ftc.teamcode.Command.waitCommand;
 
@@ -20,7 +22,7 @@ public class threeArtifactAuto_FarZoneDiamond extends autoRobotContainer {
     @Override
     public void path() {
 
-        runLimelightShooter();
+
 
         schedule(
 
@@ -31,12 +33,20 @@ public class threeArtifactAuto_FarZoneDiamond extends autoRobotContainer {
 
                         new autoLimelightLockCommand(llSub,driveSub),
 
-                        new teleOpTransferCommand(transferSub, llSub, transferMotorPower, timeOutShooting, true),
-                        new waitCommand(timeOutbetweenShoots),
-                        new teleOpTransferCommand(transferSub, llSub, transferMotorPower, timeOutShooting, true),
-                        new waitCommand(timeOutbetweenShoots),
-                        new teleOpTransferCommand(transferSub, llSub, transferMotorPower, timeOutShooting, true),
-                        new waitCommand(timeOutbetweenShoots)
+                        new teleOpFlywheelCommand(flywheelSub, farZoneShootingVelocity),
+                        new teleOpTransferCommand(transferSub, llSub, transferMotorPower,
+                                timeOutShooting, true),
+                        new waitCommand(timeOutbetweenShots),
+
+                        new teleOpFlywheelCommand(flywheelSub, farZoneShootingVelocity),
+                        new teleOpTransferCommand(transferSub, llSub, transferMotorPower,
+                                timeOutShooting, true),
+                        new waitCommand(timeOutbetweenShots),
+
+                        new teleOpFlywheelCommand(flywheelSub, farZoneShootingVelocity),
+                        new teleOpTransferCommand(transferSub, llSub, transferMotorPower,
+                                timeOutShooting, true),
+                        new waitCommand(timeOutbetweenShots)
 
 
                 )

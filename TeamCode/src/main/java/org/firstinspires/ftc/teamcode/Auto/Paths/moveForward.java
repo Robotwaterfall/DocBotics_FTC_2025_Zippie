@@ -11,7 +11,7 @@ public class moveForward extends autoRobotContainer {
     public void path() {
         schedule(
                 new SequentialCommandGroup(
-                        new MoveRobotEncoderXY_CMD(5,5, 4, 0.3, driveSub)
+                        new MoveRobotEncoderXY_CMD(10,10, 4, 0.35, driveSub)
                 )
         );
     }

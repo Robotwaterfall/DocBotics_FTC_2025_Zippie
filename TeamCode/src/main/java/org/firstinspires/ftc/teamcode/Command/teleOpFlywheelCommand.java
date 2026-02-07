@@ -1,15 +1,19 @@
 package org.firstinspires.ftc.teamcode.Command;
 
+import static org.firstinspires.ftc.teamcode.Constants.shooterConstants.shooterTolerance;
+
 import com.arcrobotics.ftclib.command.CommandBase;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotorEx;
 
+import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
 import org.firstinspires.ftc.teamcode.Constants;
 import org.firstinspires.ftc.teamcode.Subsystem.flywheelSubsystem;
 
 public class teleOpFlywheelCommand extends CommandBase {
 
     flywheelSubsystem flywheelSub;
-    DcMotor flyWheelMotor;
+    DcMotorEx flyWheelMotor;
     double flyWheelPower;
 
     public teleOpFlywheelCommand(flywheelSubsystem flywheelSub, double flywheelPower){
@@ -20,28 +24,21 @@ public class teleOpFlywheelCommand extends CommandBase {
 
     }
 
-    @Override
-    public void initialize() {
-        flyWheelMotor.setPower(0);
 
-    }
 
     @Override
     public void execute() {
 
-        flyWheelMotor.setPower(flyWheelPower);
+        flywheelSub.setVelocity(flyWheelPower);
 
     }
 
     @Override
     public boolean isFinished() {
-        return false;
+        boolean isAtSetVelocity = (flyWheelMotor.getVelocity(AngleUnit.RADIANS) > (flyWheelPower - shooterTolerance)) &&
+                (flyWheelMotor.getVelocity(AngleUnit.RADIANS) < (flyWheelPower + shooterTolerance));
+        return isAtSetVelocity;
     }
 
-    @Override
-    public void end(boolean interrupted) {
-        flyWheelMotor.setPower(0);
-
-    }
 
 }

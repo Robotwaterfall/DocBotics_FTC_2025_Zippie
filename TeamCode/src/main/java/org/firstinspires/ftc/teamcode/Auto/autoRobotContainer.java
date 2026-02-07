@@ -1,16 +1,13 @@
 package org.firstinspires.ftc.teamcode.Auto;
 
-import static org.firstinspires.ftc.teamcode.Constants.shooterConstants.shooterPower;
-
 import com.arcrobotics.ftclib.command.CommandOpMode;
 import com.arcrobotics.ftclib.command.SequentialCommandGroup;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 
 import org.firstinspires.ftc.teamcode.Command.teleOpFlywheelAdjustCommand;
 import org.firstinspires.ftc.teamcode.Command.teleOpFlywheelCommand;
-import org.firstinspires.ftc.teamcode.Command.teleOpMecanumDriveCommand;
-import org.firstinspires.ftc.teamcode.Constants;
 import org.firstinspires.ftc.teamcode.Subsystem.flywheelSubsystem;
 import org.firstinspires.ftc.teamcode.Subsystem.limelightSubsystem;
 import org.firstinspires.ftc.teamcode.Subsystem.mecanumDriveSubsystem;
@@ -24,7 +21,7 @@ public class autoRobotContainer extends CommandOpMode {
     public mecanumDriveSubsystem driveSub;
     public limelightSubsystem llSub;
 
-    public DcMotor shooterMotor;
+    public DcMotorEx shooterMotor;
     public flywheelSubsystem flywheelSub;
     public DcMotor transferMotor;
     public transferSubsystem transferSub;
@@ -47,7 +44,7 @@ public class autoRobotContainer extends CommandOpMode {
         frontLeft.setDirection(DcMotorSimple.Direction.FORWARD);
         frontRight.setDirection(DcMotorSimple.Direction.REVERSE);
 
-        shooterMotor = hardwareMap.get(DcMotor.class,"shooterMotor");
+        shooterMotor = hardwareMap.get(DcMotorEx.class,"shooterMotor");
         shooterMotor.setDirection(DcMotorSimple.Direction.FORWARD);
 
         transferMotor = hardwareMap.get(DcMotor.class, "transferMotor");
@@ -75,13 +72,7 @@ public class autoRobotContainer extends CommandOpMode {
 
     }
 
-    public void runShooter(){
-        schedule(
-                new SequentialCommandGroup(
-                        new teleOpFlywheelCommand(flywheelSub, shooterPower)
-                )
-        );
-    }
+
 
     public void runLimelightShooter(){
         schedule(
